@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Invector.vCharacterController
-{
+
     public class vThirdPersonController : vThirdPersonAnimator
     {
         public virtual void ControlAnimatorRootMotion()
@@ -10,7 +9,7 @@ namespace Invector.vCharacterController
 
             if (inputSmooth == Vector3.zero)
             {
-                transform.position = animator.rootPosition;
+                //Stransform.position = animator.rootPosition;
                 transform.rotation = animator.rootRotation;
             }
 
@@ -125,4 +124,3 @@ namespace Invector.vCharacterController
                 animator.CrossFadeInFixedTime("JumpMove", .2f);
         }
     }
-}

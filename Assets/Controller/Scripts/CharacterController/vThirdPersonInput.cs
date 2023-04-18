@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Invector.vCharacterController
-{
+
     public class vThirdPersonInput : MonoBehaviour
     {
         #region Variables       
@@ -147,4 +146,3 @@ namespace Invector.vCharacterController
 
         #endregion       
     }
-}

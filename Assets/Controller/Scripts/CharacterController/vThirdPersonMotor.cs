@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-namespace Invector.vCharacterController
-{
     public class vThirdPersonMotor : MonoBehaviour
     {
         #region Inspector Variables
@@ -399,4 +397,3 @@ namespace Invector.vCharacterController
             public float sprintSpeed = 6f;
         }
     }
-}
