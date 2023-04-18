@@ -77,6 +77,7 @@
             }
         }
 
+        
         public virtual void Sprint(bool value)
         {
             var sprintConditions = (input.sqrMagnitude > 0.1f && isGrounded &&
@@ -105,6 +106,7 @@
                 isSprinting = false;
             }
         }
+        
 
         public virtual void Strafe()
         {

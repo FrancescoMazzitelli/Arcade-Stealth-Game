@@ -75,7 +75,7 @@
         {
             MoveInput();
             CameraInput();
-            SprintInput();
+            //SprintInput();
             StrafeInput();
             JumpInput();
         }
@@ -118,6 +118,7 @@
                 cc.Strafe();
         }
 
+        /*
         protected virtual void SprintInput()
         {
             if (Input.GetKeyDown(sprintInput))
@@ -125,6 +126,7 @@
             else if (Input.GetKeyUp(sprintInput))
                 cc.Sprint(false);
         }
+        */
 
         /// <summary>
         /// Conditions to trigger the Jump animation & behavior
