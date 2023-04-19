@@ -7,10 +7,13 @@ public class SampleTeleporterController : MonoBehaviour
 
     public Teleporter teleporter;
 
+    void Start()
+    {
+        teleporter.Start();
+    }
 
     void Update()
     {
-
         if (Input.GetMouseButtonDown(0))
         {
             teleporter.DisplayArch(true);
