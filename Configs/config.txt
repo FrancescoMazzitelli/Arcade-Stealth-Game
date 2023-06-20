@@ -1,0 +1,11 @@
+Enemies
+EnemyTest1 100;
+EnemyTest2 200;
+
+Environment
+ambiente 1
+
+MainCharacter
+Pluto 300
+Pippo 400
+
