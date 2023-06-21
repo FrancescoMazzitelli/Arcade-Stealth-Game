@@ -7,23 +7,26 @@ using UnityEngine.AI; //important
 public class Patrolling : MonoBehaviour //don't forget to change the script name if you haven't
 {
     public NavMeshAgent agent;
-    public float range; //radius of sphere
+    private static float range; //radius of sphere
+    private GameObject targetAgent;
 
-    public Transform centrePoint; //centre of the area the agent wants to move around in
-    //instead of centrePoint you can set it as the transform of the agent if you don't care about a specific area
+    public void Initialize(GameObject target)
+    {
+        targetAgent = target;
+    }
 
-    void Start()
+    public void Start()
     {
         agent = GetComponent<NavMeshAgent>();
     }
 
 
-    void Update()
+    public void Update()
     {
         if (agent.remainingDistance <= agent.stoppingDistance) //done with path
         {
             Vector3 point;
-            if (RandomPoint(centrePoint.position, range, out point)) //pass in our centre point and radius of area
+            if (RandomPoint(agent.transform.position, range, out point)) //pass in our centre point and radius of area
             {
                 //Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
                 agent.SetDestination(point);
@@ -46,6 +49,12 @@ public class Patrolling : MonoBehaviour //don't forget to change the script name
 
         result = Vector3.zero;
         return false;
+    }
+
+    public static float Range
+    {
+        get { return range; }
+        set { range = value; }
     }
 
 
