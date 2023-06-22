@@ -1,6 +1,6 @@
 Enemies
-EnemyTest1 100;
-EnemyTest2 200;
+range 20
+detectingRange 10
 
 Environment
 ambiente 1

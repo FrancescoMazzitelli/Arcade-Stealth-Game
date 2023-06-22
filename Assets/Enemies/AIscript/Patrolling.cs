@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI; //important
+using UnityEngine.AI; 
 
-//if you use this code you are contractually obligated to like the YT video
-public class Patrolling : MonoBehaviour //don't forget to change the script name if you haven't
+public class Patrolling : MonoBehaviour 
 {
     public NavMeshAgent agent;
-    private static float range; //radius of sphere
+    private static float range; 
     private GameObject targetAgent;
 
     public void Initialize(GameObject target)

@@ -3,54 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-    public class ParametersStructure
+public class ParametersStructure
+{
+    private Dictionary<string, string> enemiesParams = new Dictionary<string, string>();
+    private Dictionary<string, string> environmentParams = new Dictionary<string, string>();
+    private Dictionary<string, string> mainCharacterParams = new Dictionary<string, string>();
+
+    public ParametersStructure() { }
+    public ParametersStructure(Dictionary<string, string> enemiesParams, Dictionary<string, string> environmentParams, Dictionary<string, string> mainCharacterParams)
     {
-        private Dictionary<string, string> enemiesParams = new Dictionary<string, string>();
-        private Dictionary<string, string> environmentParams = new Dictionary<string, string>();
-        private Dictionary<string, string> mainCharacterParams = new Dictionary<string, string>();
+        this.enemiesParams = enemiesParams;
+        this.environmentParams = environmentParams;
+        this.mainCharacterParams = mainCharacterParams;
+    }
 
-        public ParametersStructure() { }
-        public ParametersStructure(Dictionary<string, string> enemiesParams, Dictionary<string, string> environmentParams, Dictionary<string, string> mainCharacterParams)
+    public Dictionary<string, string> enemiesProp
+    {
+        get
         {
-            this.enemiesParams = enemiesParams;
-            this.environmentParams = environmentParams;
-            this.mainCharacterParams = mainCharacterParams;
+            return enemiesParams;
         }
-
-        public Dictionary<string, string> enemiesProp
+        set
         {
-            get
-            {
-                return enemiesParams;
-            }
-            set
-            {
-                enemiesParams = value;
-            }
-        }
-
-        public Dictionary<string, string> environmentProp
-        {
-            get
-            {
-                return environmentParams;
-            }
-            set
-            {
-                environmentParams = value;
-            }
-        }
-
-        public Dictionary<string, string> mainCharacterProp
-        {
-            get
-            {
-                return mainCharacterParams;
-            }
-            set
-            {
-                mainCharacterParams = value;
-            }
+            enemiesParams = value;
         }
     }
+
+    public Dictionary<string, string> environmentProp
+    {
+        get
+        {
+            return environmentParams;
+        }
+        set
+        {
+            environmentParams = value;
+        }
+    }
+
+    public Dictionary<string, string> mainCharacterProp
+    {
+        get
+        {
+            return mainCharacterParams;
+        }
+        set
+        {
+            mainCharacterParams = value;
+        }
+    }
+}
 

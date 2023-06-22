@@ -10,13 +10,16 @@ using System.IO;
         private Dictionary<string, string> environmentParams = new Dictionary<string, string>();
         private Dictionary<string, string> mainCharacterParams = new Dictionary<string, string>();
 
-        static readonly string textFile = @"Configs\config.txt";
+        private string textfile;
 
-        public FileReader() { }
+        public FileReader(string textFile) 
+        {
+            textfile = textFile;
+        }
 
         public ParametersStructure readParams()
         {
-            string[] lines = File.ReadAllLines(textFile);
+            string[] lines = File.ReadAllLines(textfile);
 
             for (int i = 0; i < lines.Length; i++)
             {
