@@ -7,6 +7,7 @@ public class Detecting : MonoBehaviour
     public static Transform player;
     public static float detectionRange;
     private static LayerMask playerLayer;
+    public string state;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,7 @@ public class Detecting : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -31,13 +32,13 @@ public class Detecting : MonoBehaviour
                 {
                     // Il nemico ha individuato il giocatore
                     Debug.Log("Il nemico ha individuato il giocatore!");
-                    EnemiesManager.State = "Shooting";
+                    state = "Shooting";
                 }
             }
         }
         else
         {
-            EnemiesManager.State = "Patrolling";
+            state = "Patrolling";
         }
     }
 
@@ -51,6 +52,12 @@ public class Detecting : MonoBehaviour
     {
         get { return detectionRange; }
         set { detectionRange = value; }
+    }
+
+    public string State
+    {
+        get { return state; }
+        set { state = value; }
     }
 
 }
