@@ -18,13 +18,15 @@ public class PlayerManager : MonoBehaviour
             if (gameObjects[i].name.Equals("Main character"))
                 Player = gameObjects[i];
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (SampleTeleporterController.Active == false)
+        {
+            SampleTeleporterController.instance.DisableScript();
+        }
     }
 
     public static GameObject Player

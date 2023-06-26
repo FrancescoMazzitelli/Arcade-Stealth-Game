@@ -11,7 +11,7 @@ public class EnemiesManager : MonoBehaviour
     private static List<GameObject> enemies = new List<GameObject>();
     private Dictionary<string, string> enemiesParams = new Dictionary<string, string>(); 
     public static float range;
-    public static float detectingRange;
+    public static float detectionRange;
     private static GameObject player;
     private static GameObject laser;
 
@@ -50,7 +50,7 @@ public class EnemiesManager : MonoBehaviour
             GameObject drone  = tmpDrone.gameObject;
 
             Detecting.Player = player.transform;
-            Detecting.DetectionRange = 10; //DEBUG. da sostituire con valore preso dal Main Manager
+            Detecting.DetectionRange = DetectionRange;
             drone.AddComponent<Detecting>();
             drone.GetComponent<Detecting>().enabled = true;
 
@@ -69,6 +69,16 @@ public class EnemiesManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Detecting.DetectionRange == 0 || Patrolling.Range == 0)
+        {
+            Detecting.Player = player.transform;
+            Detecting.DetectionRange = DetectionRange;
+
+            Patrolling.Range = range;
+
+            Shooting.Player = player.transform;
+        }
+
         foreach (GameObject obj in enemies)
         {
             Transform tmpDrone = obj.transform.GetChild(0);
@@ -76,7 +86,6 @@ public class EnemiesManager : MonoBehaviour
 
             PreviousState = CurrentState;
             CurrentState = drone.GetComponent<Detecting>().State;
-            Debug.Log(currentState);
 
             if (previousState == "Shooting" && currentState == "Patrolling")
             {
@@ -109,9 +118,9 @@ public class EnemiesManager : MonoBehaviour
         set { previousState = value; }
     }
 
-    public static float DetectingRange
+    public static float DetectionRange
     {
-        get { return detectingRange; }
-        set { detectingRange = value; }
+        get { return detectionRange; }
+        set { detectionRange = value; }
     }
 }

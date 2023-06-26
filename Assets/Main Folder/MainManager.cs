@@ -16,7 +16,10 @@ public class MainManager : MonoBehaviour
         Dictionary<string, string> mainCharacterProp = parameters.mainCharacterProp;
 
         EnemiesManager.Range = float.Parse(enemiesProp["range"]);
-        EnemiesManager.DetectingRange = float.Parse(enemiesProp["detectingRange"]);
+        EnemiesManager.DetectionRange = float.Parse(enemiesProp["detectingRange"]);
+
+        EnvironmentManager.Range = float.Parse(environmentProp["lightRange"]);
+        EnvironmentManager.Intensity = float.Parse(environmentProp["lightIntensity"]);
     }
 
     // Update is called once per frame

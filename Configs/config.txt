@@ -1,9 +1,10 @@
 Enemies
-range 20
-detectingRange 10
+range 10
+detectingRange 5
 
 Environment
-ambiente 1
+lightRange 12
+lightIntensity 2
 
 MainCharacter
 Pluto 300

@@ -47,7 +47,7 @@ public class Shooting : MonoBehaviour
         // Spawn del raggio laser utilizzando il prefab e il punto di spawn
         GameObject laserObj = Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
         Rigidbody laserRig = laserObj.AddComponent<Rigidbody>();
-        laserRig.AddForce(laserRig.transform.forward * force, ForceMode.Impulse);
+        laserRig.AddForce(agent.transform.forward * force, ForceMode.Impulse);
         Destroy(laserObj, 2f);
     }
 

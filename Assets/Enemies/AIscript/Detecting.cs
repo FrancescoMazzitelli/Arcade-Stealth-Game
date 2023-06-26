@@ -31,7 +31,7 @@ public class Detecting : MonoBehaviour
                 if (hit.collider.CompareTag("Player"))
                 {
                     // Il nemico ha individuato il giocatore
-                    Debug.Log("Il nemico ha individuato il giocatore!");
+                    //Debug.Log("Il nemico ha individuato il giocatore!");
                     state = "Shooting";
                 }
             }

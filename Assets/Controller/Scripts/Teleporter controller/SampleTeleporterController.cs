@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class SampleTeleporterController : MonoBehaviour
 {
+    public static SampleTeleporterController instance;
+    private static int currentEnergy = 100;
+    public static bool active = true;
 
     public Teleporter teleporter;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -14,14 +22,22 @@ public class SampleTeleporterController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if(currentEnergy > 0)
         {
-            teleporter.DisplayArch(true);
-        }
+            active = true;
+            if (Input.GetMouseButtonDown(0))
+            {
+                teleporter.DisplayArch(true);
+            }
 
-        if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0))
+            {
+                StartCoroutine("Controller");
+            }
+        }
+        else
         {
-            StartCoroutine("Controller");
+            active = false;
         }
     }
 
@@ -35,7 +51,25 @@ public class SampleTeleporterController : MonoBehaviour
             teleporter.DisplayArch(false);
             yield return new WaitForSeconds(0.02f);
             GameObject.Find("PlayerController").GetComponent<vThirdPersonInput>().enabled = true;
+            currentEnergy = currentEnergy - 20;
         }        
+    }
+
+    public void DisableScript()
+    {
+        enabled = false;
+    }
+
+    public static int Energy
+    {
+        get { return currentEnergy; }
+        set { currentEnergy = value; }
+    }
+
+    public static bool Active
+    {
+        get { return active; }
+        set { active = value; }
     }
 }
 
