@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public static GameObject player;
+    private static bool key = false;
     private static Transform playerTransform;
     private Dictionary<string, string> playerParams = new Dictionary<string, string>();
 
@@ -27,6 +28,11 @@ public class PlayerManager : MonoBehaviour
         {
             SampleTeleporterController.instance.DisableScript();
         }
+
+        if(ObjectInteraction.Interaction == true)
+        {
+            key = true;
+        }
     }
 
     public static GameObject Player
@@ -39,5 +45,11 @@ public class PlayerManager : MonoBehaviour
     {
         get { return playerTransform; }
         set { playerTransform = value; }
+    }
+
+    public static bool Key
+    {
+        get { return key; }
+        set { key = value; }
     }
 }

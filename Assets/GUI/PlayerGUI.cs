@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerGUI : MonoBehaviour
 {
     public int maxHealth = 100;
     public int maxMana = 100;
-    public int currentHealth = 100;
-    public int currentMana = 100;
+    public static int currentHealth = 100;
+    public static int currentMana = 100;
 
     private float barWidth = 200f;
     private float barHeight = 20f;
@@ -116,19 +117,20 @@ public class PlayerGUI : MonoBehaviour
 
     private void Update()
     {
-        if (currentHealth > 0)
-        {
-            currentHealth = LaserManager.Health; 
-        }
-
-        if (currentMana > 0)
-        {
-            currentMana = SampleTeleporterController.Energy;
-        }
-        
-
-        // Assicurati che i valori non scendano al di sotto di zero o al di sopra del massimo
+        // Assicurati che i valori non scendano al di sotto di uno o al di sopra del massimo
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         currentMana = Mathf.Clamp(currentMana, 0, maxMana);
+    }
+
+    public static int Health
+    {
+        get { return currentHealth; }
+        set { currentHealth = value; }
+    }
+
+    public static int Energy
+    {
+        get { return currentMana; }
+        set { currentMana = value; }
     }
 }

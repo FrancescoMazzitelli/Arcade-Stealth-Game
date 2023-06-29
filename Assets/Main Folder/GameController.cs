@@ -9,11 +9,11 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        if(LaserManager.Health <= 0)
+        if(PlayerGUI.Health <= 0)
         {
             GameOverScript.Setup();
-            vThirdPersonCamera script = mainCamera.GetComponent<vThirdPersonCamera>();
-            script.lockCamera = true;
+            vThirdPersonCamera cameraScript = mainCamera.GetComponent<vThirdPersonCamera>();
+            cameraScript.lockCamera = true;
         }
             
     }
@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-
+        GameOverScript.Setdown();
     }
 
 

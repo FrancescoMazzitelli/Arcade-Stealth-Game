@@ -6,14 +6,14 @@ public class Shooting : MonoBehaviour
 {
     public UnityEngine.AI.NavMeshAgent agent;
     public static Transform player;
-    public GameObject laserPrefab;       // Prefab del raggio laser
-    public Transform firePoint;         // Punto di spawn del raggio laser
-    public static float fireRate = 0.5f;         // Frequenza di sparo dei raggi laser (in secondi)
+    public GameObject laserPrefab;
+    public Transform firePoint;
+    public static float fireRate = 0.5f;
     public static float force = 25;
+    public float stoppingDistance = 2.3f; // Distanza di arresto rispetto al player
 
-    private float nextFireTime;         // Tempo prossimo sparo
+    private float nextFireTime;
 
-    // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -27,24 +27,33 @@ public class Shooting : MonoBehaviour
         }
 
         firePoint = agent.transform;
-        nextFireTime = Time.time;       // Inizializza il tempo prossimo sparo all'avvio dello script
+        nextFireTime = Time.time;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Imposta la destinazione del nemico al player
         agent.SetDestination(player.position);
-        // Controlla se � il momento di sparare
+
+        // Controlla se il nemico è vicino al player e ferma l'agente di navigazione
+        if (Vector3.Distance(transform.position, player.position) <= stoppingDistance)
+        {
+            agent.isStopped = true;
+        }
+        else
+        {
+            agent.isStopped = false;
+        }
+
         if (Time.time >= nextFireTime)
         {
-            FireLaser();                 // Spara il raggio laser
-            nextFireTime = Time.time + 1f / fireRate;   // Aggiorna il tempo prossimo sparo
+            FireLaser();
+            nextFireTime = Time.time + 1f / fireRate;
         }
     }
 
     private void FireLaser()
     {
-        // Spawn del raggio laser utilizzando il prefab e il punto di spawn
         GameObject laserObj = Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
         Rigidbody laserRig = laserObj.AddComponent<Rigidbody>();
         laserRig.AddForce(agent.transform.forward * force, ForceMode.Impulse);

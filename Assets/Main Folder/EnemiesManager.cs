@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemiesManager : MonoBehaviour
 {
@@ -8,31 +9,25 @@ public class EnemiesManager : MonoBehaviour
     public static string previousState;
 
     private GameObject enemiesContainer;
-    private static List<GameObject> enemies = new List<GameObject>();
+    private static List<GameObject> enemies ;
     private Dictionary<string, string> enemiesParams = new Dictionary<string, string>(); 
     public static float range;
     public static float detectionRange;
     private static GameObject player;
     private static GameObject laser;
 
-    void Start()
+    void Awake()
     {
-        GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>();
+        List<GameObject> enemiesT = new List<GameObject>();
 
-        for (int i = 0; i < gameObjects.Length; i++)
-        {
-            if (gameObjects[i].name.Equals("Enemies")) 
-                enemiesContainer = gameObjects[i];
-            if (gameObjects[i].name.Equals("Main character"))
-            {
-                Transform tmpPlayer = gameObjects[i].transform.GetChild(0);
-                player = tmpPlayer.gameObject;
-            }
-            if (gameObjects[i].name.Equals("Laser"))
-            {
-                laser = gameObjects[i];
-            }
-        }
+        GameObject enemiesContainerT = GameObject.FindGameObjectWithTag("Enemies");
+        enemiesContainer = enemiesContainerT;
+        GameObject playerContainer = GameObject.FindGameObjectWithTag("Player");
+        Transform tmpPlayer = playerContainer.transform.GetChild(0);
+        GameObject playerT = tmpPlayer.gameObject;
+        player = playerT;
+        GameObject laserT = GameObject.FindGameObjectWithTag("Laser");
+        laser = laserT;
 
         int childCount = enemiesContainer.transform.childCount;
 
@@ -41,9 +36,16 @@ public class EnemiesManager : MonoBehaviour
         {
             Transform childTransform = enemiesContainer.transform.GetChild(i);
             GameObject childObject = childTransform.gameObject;
-            enemies.Add (childObject);
+            enemiesT.Add(childObject);
         }
 
+        enemies = enemiesT;
+
+        SendScripts();
+    }
+
+    void SendScripts()
+    {
         foreach(GameObject obj in enemies)
         {
             Transform tmpDrone = obj.transform.GetChild(0);

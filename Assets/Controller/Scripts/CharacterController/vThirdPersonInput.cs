@@ -12,7 +12,7 @@
         public KeyCode strafeInput = KeyCode.Tab;
         public KeyCode sprintInput = KeyCode.LeftShift;
 
-        [Header("Camera Input")]
+    [Header("Camera Input")]
         public string rotateCameraXInput = "Mouse X";
         public string rotateCameraYInput = "Mouse Y";
 

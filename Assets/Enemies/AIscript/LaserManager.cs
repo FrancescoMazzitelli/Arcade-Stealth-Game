@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class LaserManager : MonoBehaviour
 {
-    private static int currentHealth = 100;
-
     private void Start()
     {
         Collider collider = GetComponent<Collider>();
@@ -19,13 +17,7 @@ public class LaserManager : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Destroy(gameObject);
-            currentHealth = currentHealth - 5;
+            PlayerGUI.Health -= 5;
         }
-    }
-
-    public static int Health
-    {
-        get { return currentHealth; }
-        set { currentHealth = value; }
     }
 }
