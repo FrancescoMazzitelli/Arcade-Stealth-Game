@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Patrolling : MonoBehaviour 
 {
     public NavMeshAgent agent;
-    private static float range; 
+    private static float range = 10f; 
     private GameObject targetAgent;
 
     public void Initialize(GameObject target)

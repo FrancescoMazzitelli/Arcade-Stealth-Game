@@ -7,11 +7,14 @@ public class Detecting : MonoBehaviour
     public static Transform player;
     public static float detectionRange;
     private static LayerMask playerLayer;
-    public string state;
+    public bool state;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject playerContainer = GameObject.FindGameObjectWithTag("Player");
+        player = playerContainer.transform.GetChild(0);
+
         playerLayer = LayerMask.GetMask("Player");
     }
 
@@ -31,14 +34,14 @@ public class Detecting : MonoBehaviour
                 if (hit.collider.CompareTag("Player"))
                 {
                     // Il nemico ha individuato il giocatore
-                    //Debug.Log("Il nemico ha individuato il giocatore!");
-                    state = "Shooting";
+                    // Debug.Log("Il nemico ha individuato il giocatore!");
+                    state = true;
                 }
             }
         }
         else
         {
-            state = "Patrolling";
+            state = false;
         }
     }
 
@@ -54,17 +57,10 @@ public class Detecting : MonoBehaviour
         set { detectionRange = value; }
     }
 
-    public string State
+    public bool State
     {
         get { return state; }
         set { state = value; }
     }
 
 }
-
-
-
-
-
-
-

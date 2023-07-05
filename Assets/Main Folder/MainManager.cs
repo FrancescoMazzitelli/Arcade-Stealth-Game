@@ -11,6 +11,7 @@ public class MainManager : MonoBehaviour
         FileReader reader = new FileReader(textFile);
         
         ParametersStructure parameters = reader.readParams();
+
         Dictionary<string, string> enemiesProp = parameters.enemiesProp;
         Dictionary<string, string> environmentProp = parameters.environmentProp;
         Dictionary<string, string> mainCharacterProp = parameters.mainCharacterProp;

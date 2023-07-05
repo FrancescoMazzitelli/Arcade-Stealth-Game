@@ -18,13 +18,10 @@ public class Shooting : MonoBehaviour
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
-        GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>();
+        laserPrefab = GameObject.FindWithTag("Laser");
 
-        for (int i = 0; i < gameObjects.Length; i++)
-        {
-            if (gameObjects[i].name.Equals("Laser"))
-                laserPrefab = gameObjects[i];
-        }
+        GameObject playerContainer = GameObject.FindGameObjectWithTag("Player");
+        player = playerContainer.transform.GetChild(0);
 
         firePoint = agent.transform;
         nextFireTime = Time.time;
@@ -32,19 +29,6 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
-        // Imposta la destinazione del nemico al player
-        agent.SetDestination(player.position);
-
-        // Controlla se il nemico è vicino al player e ferma l'agente di navigazione
-        if (Vector3.Distance(transform.position, player.position) <= stoppingDistance)
-        {
-            agent.isStopped = true;
-        }
-        else
-        {
-            agent.isStopped = false;
-        }
-
         if (Time.time >= nextFireTime)
         {
             FireLaser();
