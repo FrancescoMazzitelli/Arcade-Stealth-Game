@@ -24,12 +24,31 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if (PlayerGUI.Energy <= 0 && SampleTeleporterController.Active == true)
+        {
+            SampleTeleporterController.Active = false;
+        }
+
+        if (PlayerGUI.Health <= 0 && SampleTeleporterController.Active == true)
+        {
+            SampleTeleporterController.Active = false;
+        }
+
+
+
+
         if (SampleTeleporterController.Active == false)
         {
             SampleTeleporterController.instance.DisableScript();
         }
 
-        if(ObjectInteraction.Interaction == true)
+        if (SampleTeleporterController.Active == true)
+        {
+            SampleTeleporterController.instance.EnableScript();
+        }
+
+        if (ObjectInteraction.Interaction == true)
         {
             key = true;
         }

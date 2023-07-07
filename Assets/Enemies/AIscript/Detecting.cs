@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Detecting : MonoBehaviour
 {
     public static Transform player;
-    public static float detectionRange;
+    public static float detectionRange = 5f;
     private static LayerMask playerLayer;
-    public bool state;
+    public bool rilevato;
+    public event Action<bool> detected;
 
     // Start is called before the first frame update
     void Start()
@@ -35,14 +37,19 @@ public class Detecting : MonoBehaviour
                 {
                     // Il nemico ha individuato il giocatore
                     // Debug.Log("Il nemico ha individuato il giocatore!");
-                    state = true;
+                    State = true;
                 }
             }
         }
         else
         {
-            state = false;
+            State = false;
         }
+    }
+
+    private void NotifyObservers()
+    {
+        detected?.Invoke(rilevato);
     }
 
     public static Transform Player
@@ -59,8 +66,12 @@ public class Detecting : MonoBehaviour
 
     public bool State
     {
-        get { return state; }
-        set { state = value; }
+        get { return rilevato; }
+        set
+        {
+            rilevato = value;
+            NotifyObservers();
+        }
     }
 
 }

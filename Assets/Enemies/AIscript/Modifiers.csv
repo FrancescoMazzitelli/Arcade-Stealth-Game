@@ -1,0 +1,4 @@
+State, Patrolling, Shooting, Chasing, Detecting
+Patrolling, 1, 0, 0, 1
+Shooting, 0, 1, 1, 1
+Chasing, 0, 1, 1, 1

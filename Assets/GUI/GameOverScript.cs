@@ -8,6 +8,7 @@ public class GameOverScript : MonoBehaviour
     public void Setup()
     {
         gameObject.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void RestartButton()
@@ -15,11 +16,18 @@ public class GameOverScript : MonoBehaviour
         SceneManager.LoadScene("Tutorial");
         PlayerGUI.Health = 100;
         PlayerGUI.Energy = 100;
+        SampleTeleporterController.Active = true;
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Setdown()
     {
         gameObject.SetActive(false);
+        Time.timeScale = 1f;
     }
 
 }

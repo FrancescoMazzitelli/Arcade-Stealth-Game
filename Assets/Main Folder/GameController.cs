@@ -12,8 +12,6 @@ public class GameController : MonoBehaviour
         if(PlayerGUI.Health <= 0)
         {
             GameOverScript.Setup();
-            vThirdPersonCamera cameraScript = mainCamera.GetComponent<vThirdPersonCamera>();
-            cameraScript.lockCamera = true;
         }
             
     }

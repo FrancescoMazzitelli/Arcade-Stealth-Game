@@ -10,17 +10,36 @@ public class EnemyComponentManager
 {
     private List<EnemyFeature> features;
     private List<EnemyModifier> modifiers;
+    private List<EnemyState> states;
 
-    public EnemyComponentManager()
+    private static EnemyComponentManager instance;
+
+    public static EnemyComponentManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new EnemyComponentManager();
+            }
+            return instance;
+        }
+    }
+
+    private EnemyComponentManager()
     {
         features = new List<EnemyFeature> ();
         modifiers = new List<EnemyModifier> ();
+        states = new List<EnemyState>();
     }
     public void Bind()
     {
-        //Creazione tabella
+        //Creazione tabelle
         Table table = new Table();
-        table.InsertFromCSV("Assets/Enemies/AIscript/EnemiesStates.csv");
+        table.InsertFromCSV("Assets/Enemies/AIscript/Modifiers.csv");
+
+        Table statesTable = new Table();
+        statesTable.InsertFromCSV("Assets/Enemies/AIscript/EnemiesStates.csv");
 
         //Features
         string[] featuresNames = table.GetHeader();
@@ -33,12 +52,31 @@ public class EnemyComponentManager
         {
             tmpMod = table.GetRow(i);
             FillModifiers(tmpMod);
+        }
+
+        //States
+        List<string> tmpState = new List<string>();
+        string[] statesNames = statesTable.GetHeader();
+        int statesRows = statesTable.NumRows;
+        for(int i = 1; i< statesRows; i++)
+        {
+            tmpState = statesTable.GetRow(i);
+            FillStates(statesNames, tmpState);
         }        
     }
 
-    public void Update()
+    public void FillStates(string[] names, List<string> row)
     {
-        
+        Dictionary<string, bool> stateRow = new Dictionary<string, bool> ();
+
+        for (int i = 0; i < row.Count; i++)
+        {
+            bool boolValue = (row[i].Trim() == "1") ? true : false;
+            stateRow.Add(names[i].Trim(), boolValue);
+        }
+
+        EnemyState state = new EnemyState(stateRow);
+        states.Add(state);
     }
 
     private void FillFeatures(string[] names)
@@ -111,5 +149,11 @@ public class EnemyComponentManager
     {
         get { return modifiers; }
         set { modifiers = value; }
+    }
+
+    public List<EnemyState> States
+    {
+        get { return states; }
+        set { states = value; }
     }
 }

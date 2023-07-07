@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity;
 
 public class EnemiesManager : MonoBehaviour
 {
-    public static string currentState;
-    public static string previousState;
-
     public EnemyComponentManager manager;
 
     private GameObject enemiesContainer;
-    private static List<GameObject> enemies ;
+    private static List<GameObject> enemies;
     private Dictionary<string, string> enemiesParams = new Dictionary<string, string>();
     public static float range;
     public static float detectionRange;
@@ -20,7 +18,7 @@ public class EnemiesManager : MonoBehaviour
 
     void Awake()
     {
-        manager = new EnemyComponentManager();
+        manager = EnemyComponentManager.Instance;
         manager.Bind();
 
         enemies = new List<GameObject>();
@@ -46,12 +44,7 @@ public class EnemiesManager : MonoBehaviour
         }
 
         SendScripts();
-
-        foreach (EnemyModifier modifier in manager.Modifiers)
-        {
-            if (modifier.GetName.Equals("Patrolling"))
-                modifier.Enabled = true;
-        }
+        AttachObservers();
     }
 
     void SendScripts()
@@ -102,22 +95,33 @@ public class EnemiesManager : MonoBehaviour
         }
     }
 
+    public void AttachObservers()
+    {;
+        List<Detecting> detectingScripts = new List<Detecting>();
+
+        foreach (GameObject drone in enemies)
+        {
+            Detecting detecting = drone.GetComponent<Detecting>();
+            detectingScripts.Add(detecting);
+        }
+
+        DetectingObserver observer = new DetectingObserver();
+        observer.Bind(detectingScripts);
+
+        foreach (EnemyModifier modifier in manager.Modifiers)
+        {
+            if (modifier.GetName == "Patrolling")
+            {
+                modifier.Enabled = true;
+            }
+        }
+    }
+
+
     public static float Range
     {
         get { return range; }
         set { range = value; }
-    }
-
-    public static string CurrentState
-    {
-        get { return currentState; }
-        set { currentState = value; }
-    }
-
-    public static string PreviousState
-    {
-        get { return previousState; }
-        set { previousState = value; }
     }
 
     public static float DetectionRange

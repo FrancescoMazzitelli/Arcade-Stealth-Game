@@ -5,7 +5,7 @@ using UnityEngine;
 public class SampleTeleporterController : MonoBehaviour
 {
     public static SampleTeleporterController instance;
-    public static bool active;
+    public static bool active = true;
 
     public Teleporter teleporter;
 
@@ -23,7 +23,6 @@ public class SampleTeleporterController : MonoBehaviour
     {
         if(PlayerGUI.Energy > 0)
         {
-            Active = true;
             if (Input.GetMouseButtonDown(0))
             {
                 teleporter.DisplayArch(true);
@@ -33,15 +32,6 @@ public class SampleTeleporterController : MonoBehaviour
             {
                 StartCoroutine("Controller");
             }
-        }
-        if (PlayerGUI.Energy <= 0)
-        {
-            Active = false;
-        }
-
-        if (PlayerGUI.Health <= 0)
-        {
-            Active = false;
         }
     }
 
@@ -62,6 +52,11 @@ public class SampleTeleporterController : MonoBehaviour
     public void DisableScript()
     {
         enabled = false;
+    }
+
+    public void EnableScript()
+    {
+        enabled = true;
     }
 
     public static bool Active
