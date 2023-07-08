@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Laser
   - Enemies
+  - ShopItem
   layers:
   - Default
   - TransparentFX
