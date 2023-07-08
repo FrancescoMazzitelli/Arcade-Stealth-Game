@@ -7,6 +7,6 @@ lightRange 12
 lightIntensity 2
 
 MainCharacter
-Pluto 300
-Pippo 400
+Health 100
+Energy 100
 
