@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 
 public class ShopManager : MonoBehaviour
@@ -197,5 +198,20 @@ public class ShopManager : MonoBehaviour
                 writer.WriteLine(line);
             }
         }
+    }
+
+    public void NewGame()
+    {
+        // Provvisorio
+        // Qui bisogna collegare lo script di generazione procedurale del livello
+        SceneManager.LoadScene("Tutorial");
+        PlayerGUI.CurrentHealth = (int)PlayerManager.MaxHealth;
+        PlayerGUI.CurrentEnergy = (int)PlayerManager.MaxEnergy;
+        SampleTeleporterController.Active = true;
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

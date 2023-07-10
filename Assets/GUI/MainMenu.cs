@@ -15,6 +15,11 @@ public class MainMenu : MonoBehaviour
 
     public void Shop()
     {
+        SceneManager.LoadScene("Shop");
+    }
 
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

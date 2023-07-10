@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class FinishScript : MonoBehaviour
 {
-    public static bool paused;
-    public GameObject pauseMenu;
-
+    public GameObject levelComplete;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,41 +15,32 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
-            if(paused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+            levelComplete.SetActive(true);
+            Time.timeScale = 0f;
+            SampleTeleporterController.Active = false;
         }
     }
 
-    public void Resume()
+    public void NextLevel()
     {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-        paused = false;
-        SampleTeleporterController.Active = true;
-    }
-
-    public void Restart()
-    {
+        // Provvisorio
+        // Qui bisogna collegare lo script di generazione procedurale del livello
         SceneManager.LoadScene("Tutorial");
         PlayerGUI.CurrentHealth = (int)PlayerManager.MaxHealth;
         PlayerGUI.CurrentEnergy = (int)PlayerManager.MaxEnergy;
         SampleTeleporterController.Active = true;
     }
 
-    public void Pause()
+    public void Shop()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        paused = true;
-        SampleTeleporterController.Active = false;
+        SceneManager.LoadScene("Shop");
     }
 
     public void MainMenu()
