@@ -41,8 +41,8 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene("Tutorial");
-        PlayerGUI.Health = 100;
-        PlayerGUI.Energy = 100;
+        PlayerGUI.CurrentHealth = (int)PlayerManager.MaxHealth;
+        PlayerGUI.CurrentEnergy = (int)PlayerManager.MaxEnergy;
         SampleTeleporterController.Active = true;
     }
 

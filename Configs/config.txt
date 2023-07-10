@@ -7,6 +7,6 @@ lightRange 12
 lightIntensity 2
 
 MainCharacter
-Health 100
-Energy 100
+baseHealth 100
+baseEnergy 100
 

@@ -22,27 +22,35 @@ public class Table
         {
             string[] lines = File.ReadAllLines(filePath);
 
-            numRows = lines.Length;
-            numColumns = 0;
-
-            foreach (string line in lines)
+            if (lines.Length > 0)
             {
-                string[] values = line.Split(',');
+                numRows = lines.Length;
+                numColumns = 0;
 
-                if (values.Length > numColumns)
+                foreach (string line in lines)
                 {
-                    numColumns = values.Length;
-                }
+                    string[] values = line.Split(',');
 
-                List<string> row = new List<string>(values);
-                data.Add(row);
+                    if (values.Length > numColumns)
+                    {
+                        numColumns = values.Length;
+                    }
+
+                    List<string> row = new List<string>(values);
+                    data.Add(row);
+                }
+            }
+            else
+            {
+                Debug.Log("Il file CSV è vuoto: " + filePath);
             }
         }
         else
         {
-            Console.WriteLine("File CSV non trovato: " + filePath);
+            Debug.Log("File CSV non trovato: " + filePath);
         }
     }
+
 
     public string[] GetHeader()
     {

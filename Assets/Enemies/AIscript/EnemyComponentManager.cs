@@ -32,6 +32,7 @@ public class EnemyComponentManager
         modifiers = new List<EnemyModifier> ();
         states = new List<EnemyState>();
     }
+
     public void Bind()
     {
         //Creazione tabelle

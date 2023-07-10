@@ -21,7 +21,7 @@ public class SampleTeleporterController : MonoBehaviour
 
     void Update()
     {
-        if(PlayerGUI.Energy > 0)
+        if(PlayerGUI.CurrentEnergy > 0)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -45,7 +45,7 @@ public class SampleTeleporterController : MonoBehaviour
             teleporter.DisplayArch(false);
             yield return new WaitForSeconds(0.02f);
             GameObject.Find("PlayerController").GetComponent<vThirdPersonInput>().enabled = true;
-            PlayerGUI.Energy -= 20;
+            PlayerGUI.CurrentEnergy -= 20;
         }        
     }
 

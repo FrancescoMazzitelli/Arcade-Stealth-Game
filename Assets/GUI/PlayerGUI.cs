@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 
 public class PlayerGUI : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int maxMana = 100;
-    public static int currentHealth = 100;
-    public static int currentMana = 100;
+    public int maxHealth;
+    public int maxMana;
 
-    private float barWidth = 200f;
-    private float barHeight = 20f;
-    private float borderRadius = 10f;
-    private float barOpacity = 0.5f;
+    public static int currentHealth;
+    public static int currentMana;
+
+    private float barWidth;
+    private float barHeight;
+    private float borderRadius;
+    private float barOpacity;
 
     private void OnGUI()
     {
@@ -114,6 +116,19 @@ public class PlayerGUI : MonoBehaviour
         return distance <= radius;
     }
 
+    void Start()
+    {
+        maxHealth = (int)PlayerManager.MaxHealth;
+        maxMana = (int)PlayerManager.MaxEnergy;
+
+        currentHealth = (int)PlayerManager.MaxHealth;
+        currentMana = (int)PlayerManager.MaxEnergy;
+
+        barWidth = 200f;
+        barHeight = 20f;
+        borderRadius = 10f;
+        barOpacity = 0.5f;
+}
 
     private void Update()
     {
@@ -122,13 +137,13 @@ public class PlayerGUI : MonoBehaviour
         currentMana = Mathf.Clamp(currentMana, 0, maxMana);
     }
 
-    public static int Health
+    public static int CurrentHealth
     {
         get { return currentHealth; }
         set { currentHealth = value; }
     }
 
-    public static int Energy
+    public static int CurrentEnergy
     {
         get { return currentMana; }
         set { currentMana = value; }

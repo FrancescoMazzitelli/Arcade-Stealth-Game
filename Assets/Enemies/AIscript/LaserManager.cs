@@ -17,7 +17,7 @@ public class LaserManager : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Destroy(gameObject);
-            PlayerGUI.Health -= 5;
+            PlayerGUI.CurrentHealth -= 5;
         }
     }
 }

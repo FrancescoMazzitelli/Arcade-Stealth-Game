@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        if(PlayerGUI.Health <= 0)
+        if(PlayerGUI.CurrentHealth <= 0)
         {
             GameOverScript.Setup();
         }

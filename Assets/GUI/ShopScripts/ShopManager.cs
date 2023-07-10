@@ -21,6 +21,8 @@ public class ShopManager : MonoBehaviour
     private List<Button> buttons;
 
     private GameObject contents;
+    private static PlayerComponentManager manager;
+    private string activeModifiersPath = "Assets/Player/ActiveModifiers.csv";
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,8 @@ public class ShopManager : MonoBehaviour
         shopPanels = new List<ShopTemplate> ();
         shopItems = new List<ShopItem>();
         buttons = new List<Button>();
+
+        manager = PlayerComponentManager.Instance;
 
         //----------------------------------------------------------------------------------------------------------------//
 
@@ -103,9 +107,11 @@ public class ShopManager : MonoBehaviour
 
     public void CheckPurchaseable()
     {
-        for(int i=0; i<shopItems.Count; i++)
+        //controlla se hai già il potenziamento
+        
+        for (int i = 0; i < shopItems.Count; i++)
         {
-            if(points >= shopItems[i].price)
+            if (points >= shopItems[i].price)
                 buttons[i].interactable = true;
             else
                 buttons[i].interactable = false;
@@ -126,9 +132,70 @@ public class ShopManager : MonoBehaviour
     {
         if(points  >= shopItems[buttonIndex].price)
         {
+            //Attiva il modifier
+            foreach (PlayerModifier modifier in manager.Modifiers)
+            {
+                if (modifier.GetName.Equals(shopItems[buttonIndex].title.Trim()))
+                {
+                    modifier.Enabled = true;
+                }
+            }
+
             points = points - shopItems[buttonIndex].price;
             pointsUI.text = "Points: " + points.ToString();
+
+            /* scrivi sul file per backup e per non perdere i potenziamenti
+             * all'avvio di una nuova sessione di gioco */
+            WriteToCSV(activeModifiersPath, shopItems[buttonIndex].title.Trim(), true);
             CheckPurchaseable();
+        }
+    }
+
+    public static void WriteToCSV(string filePath, string name, bool value)
+    {
+        //Controllo se il modifier è già presente tra quelli attivi e aggiorno la struttura
+        Dictionary<PlayerModifier, bool> activeModifiers = manager.ActiveModifiers;
+        Dictionary<PlayerModifier, bool> activeModifiersCopy = new Dictionary<PlayerModifier, bool>(activeModifiers);
+
+        if (activeModifiers.Count > 0)
+        {
+            foreach (KeyValuePair<PlayerModifier, bool> pair in activeModifiersCopy)
+            {
+                PlayerModifier key = pair.Key;
+                if (key.GetName.Equals(name))
+                {
+                    activeModifiers[key] = value;
+                }               
+            }
+
+            manager.ActiveModifiers = activeModifiers;
+        }
+        else
+        {
+            foreach (PlayerModifier modifier in manager.Modifiers)
+            {
+                if (modifier.GetName.Equals(name))
+                {
+                    activeModifiers.Add(modifier, value);
+                }
+                if (!modifier.GetName.Equals(name))
+                {
+                    activeModifiers.Add(modifier, false);
+                }
+            }
+
+            manager.ActiveModifiers = activeModifiers;
+        }
+       
+        //Scrivo sul file
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            foreach (KeyValuePair<PlayerModifier, bool> entry in activeModifiers)
+            {
+                int intValue = entry.Value ? 1 : 0;
+                string line = $"{entry.Key.GetName}, {intValue}";
+                writer.WriteLine(line);
+            }
         }
     }
 }
