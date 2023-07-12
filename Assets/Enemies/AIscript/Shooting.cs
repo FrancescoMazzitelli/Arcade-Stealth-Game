@@ -10,7 +10,6 @@ public class Shooting : MonoBehaviour
     public Transform firePoint;
     public static float fireRate = 0.5f;
     public static float force = 25;
-    public float stoppingDistance = 2.3f; // Distanza di arresto rispetto al player
 
     private float nextFireTime;
 

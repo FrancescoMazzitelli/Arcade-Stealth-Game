@@ -7,17 +7,19 @@ using System;
 
 public class PlayerGUI : MonoBehaviour
 {
-    public int maxHealth;
-    public int maxMana;
+    public static int maxHealth;
+    public static int maxEnergy;
 
     public static int currentHealth;
-    public static int currentMana;
+    public static int currentEnergy;
 
-    private float barWidth;
+    private float healthBarWidth;
+    private float energyBarWidth;
     private float barHeight;
     private float borderRadius;
     private float barOpacity;
 
+    private PlayerComponentManager manager;
     private void OnGUI()
     {
         // Calcola le dimensioni e la posizione della GUI
@@ -28,10 +30,10 @@ public class PlayerGUI : MonoBehaviour
         float manaBarPosY = healthBarPosY + barHeight + padding;
 
         // Disegna la barra della salute
-        DrawColoredBar(new Rect(healthBarPosX, healthBarPosY, barWidth, barHeight), currentHealth, maxHealth, Color.red, "Health");
+        DrawColoredBar(new Rect(healthBarPosX, healthBarPosY, healthBarWidth, barHeight), currentHealth, maxHealth, Color.red, "Health");
 
         // Disegna la barra del mana
-        DrawColoredBar(new Rect(manaBarPosX, manaBarPosY, barWidth, barHeight), currentMana, maxMana, Color.blue, "Energy");
+        DrawColoredBar(new Rect(manaBarPosX, manaBarPosY, energyBarWidth, barHeight), currentEnergy, maxEnergy, Color.blue, "Energy");
     }
 
     private void DrawColoredBar(Rect rect, int currentValue, int maxValue, Color color, string labelText)
@@ -118,23 +120,30 @@ public class PlayerGUI : MonoBehaviour
 
     void Start()
     {
-        maxHealth = (int)PlayerManager.MaxHealth;
-        maxMana = (int)PlayerManager.MaxEnergy;
+        manager = PlayerComponentManager.Instance;
 
-        currentHealth = (int)PlayerManager.MaxHealth;
-        currentMana = (int)PlayerManager.MaxEnergy;
+        PlayerFeature health = manager.Features["baseHealth"];
+        PlayerFeature energy = manager.Features["baseEnergy"];
 
-        barWidth = 200f;
+        maxHealth = (int)health.BaseValue;
+        currentHealth = (int)health.CurrentValue;
+
+        maxEnergy = (int)energy.BaseValue;
+        currentEnergy = (int)energy.CurrentValue;
+
+        healthBarWidth = (float)maxHealth * 2;
+        energyBarWidth = (float)maxEnergy * 2;
+
         barHeight = 20f;
         borderRadius = 10f;
         barOpacity = 0.5f;
-}
+    }
 
     private void Update()
     {
         // Assicurati che i valori non scendano al di sotto di uno o al di sopra del massimo
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        currentMana = Mathf.Clamp(currentMana, 0, maxMana);
+        currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
     }
 
     public static int CurrentHealth
@@ -145,7 +154,19 @@ public class PlayerGUI : MonoBehaviour
 
     public static int CurrentEnergy
     {
-        get { return currentMana; }
-        set { currentMana = value; }
+        get { return currentEnergy; }
+        set { currentEnergy = value; }
+    }
+
+    public static int MaxHealth
+    {
+        get { return maxHealth; }
+        set { maxHealth = value; }
+    }
+
+    public static int MaxEnergy
+    {
+        get { return maxEnergy; }
+        set { maxEnergy = value; }
     }
 }

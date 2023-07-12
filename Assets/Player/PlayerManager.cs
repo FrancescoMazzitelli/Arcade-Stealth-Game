@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    
-    private static float maxHealth;
-    private static float maxEnergy;
-
     public PlayerComponentManager manager;
     public static GameObject player;
     private static bool key = false;
@@ -18,45 +14,24 @@ public class PlayerManager : MonoBehaviour
         manager = PlayerComponentManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player");
 
-        foreach (PlayerFeature feature in manager.Features)
-        {
-            if (feature.Name.Contains("Health"))
-            {
-                maxHealth = feature.BaseValue;
-            }
-            if (feature.Name.Contains("Energy"))
-            {
-                maxEnergy = feature.BaseValue;
-            }
-        }
-
         foreach (PlayerModifier modifier in manager.Modifiers)
         {
             if (modifier.Enabled == true)
             {
                 PlayerFeature feature = modifier.Feature;
 
-                feature.CurrentValue = feature.CurrentValue + modifier.AddFactor;
-                float newValue = feature.CurrentValue;
+                feature.BaseValue = feature.BaseValue + modifier.AddFactor;
+                feature.CurrentValue = feature.BaseValue;
                 modifier.Enabled = false;
-                if (feature.Name.Contains("Health"))
-                {
-                    if (maxHealth > 0)
-                        maxHealth = feature.CurrentValue;
-                }
-                if (feature.Name.Contains("Energy"))
-                {
-                    if (maxEnergy > 0)
-                        maxEnergy = feature.CurrentValue;
-                }
+                manager.Features[feature.Name] = feature;
             }
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("Max Health" + PlayerGUI.MaxHealth);
+        Debug.Log("Max Energy" + PlayerGUI.MaxEnergy);
     }
 
     // Update is called once per frame
@@ -108,17 +83,5 @@ public class PlayerManager : MonoBehaviour
     {
         get { return key; }
         set { key = value; }
-    }
-
-    public static float MaxHealth
-    {
-        get { return maxHealth; }
-        set { maxHealth = value; }
-    }
-
-    public static float MaxEnergy
-    {
-        get { return maxEnergy; }
-        set { maxEnergy = value; }
     }
 }

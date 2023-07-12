@@ -33,8 +33,8 @@ public class FinishScript : MonoBehaviour
         // Provvisorio
         // Qui bisogna collegare lo script di generazione procedurale del livello
         SceneManager.LoadScene("Tutorial");
-        PlayerGUI.CurrentHealth = (int)PlayerManager.MaxHealth;
-        PlayerGUI.CurrentEnergy = (int)PlayerManager.MaxEnergy;
+        PlayerGUI.CurrentHealth = (int)PlayerGUI.MaxHealth;
+        PlayerGUI.CurrentEnergy = (int)PlayerGUI.MaxEnergy;
         SampleTeleporterController.Active = true;
     }
 

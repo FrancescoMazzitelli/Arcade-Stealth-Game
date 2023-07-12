@@ -8,7 +8,7 @@ using System.Linq;
 
 public class PlayerComponentManager
 {
-    private List<PlayerFeature> features;
+    private Dictionary<string, PlayerFeature> features;
     private List<PlayerModifier> modifiers;
     private Dictionary<PlayerModifier, bool> activeModifiers;
 
@@ -28,7 +28,7 @@ public class PlayerComponentManager
 
     private PlayerComponentManager()
     {
-        features = new List<PlayerFeature>();
+        features = new Dictionary<string, PlayerFeature>();
         modifiers = new List<PlayerModifier>();
         activeModifiers = new Dictionary<PlayerModifier, bool>();
         Bind();
@@ -91,7 +91,7 @@ public class PlayerComponentManager
             float baseValue = float.Parse(value);
 
             PlayerFeature feature = new PlayerFeature(key, baseValue, baseValue);
-            features.Add(feature);
+            features.Add(key, feature);
         }
     }
 
@@ -101,13 +101,7 @@ public class PlayerComponentManager
         string featureS = mod[1].Trim();
         string valueS = mod[2].Trim();
         float value = float.Parse(valueS);
-        PlayerFeature feature = null;
-
-        foreach(PlayerFeature x in features) 
-        {
-            if(x.Name == featureS)
-                feature = x;
-        }
+        PlayerFeature feature = features[featureS];
 
         if(feature != null)
         {
@@ -132,7 +126,7 @@ public class PlayerComponentManager
         }
     }
 
-    public List<PlayerFeature> Features
+    public Dictionary<string, PlayerFeature> Features
     {
         get { return features; }
         set { features = value; }

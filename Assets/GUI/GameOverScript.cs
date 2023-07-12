@@ -14,8 +14,8 @@ public class GameOverScript : MonoBehaviour
     public void RestartButton()
     {
         SceneManager.LoadScene("Tutorial");
-        PlayerGUI.CurrentHealth = (int)PlayerManager.MaxHealth;
-        PlayerGUI.CurrentEnergy = (int)PlayerManager.MaxEnergy;
+        PlayerGUI.CurrentHealth = (int)PlayerGUI.MaxHealth;
+        PlayerGUI.CurrentEnergy = (int)PlayerGUI.MaxEnergy;
         SampleTeleporterController.Active = true;
     }
 

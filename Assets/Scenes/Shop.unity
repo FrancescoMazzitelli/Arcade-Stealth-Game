@@ -772,8 +772,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 691.47, y: 124.79}
-  m_SizeDelta: {x: 345.4726, y: 88.8837}
+  m_AnchoredPosition: {x: 683.57, y: 124.79}
+  m_SizeDelta: {x: 361.28, y: 88.8837}
   m_Pivot: {x: 0.50000006, y: 0.4999999}
 --- !u!114 &390468736
 MonoBehaviour:
@@ -1060,7 +1060,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Generate Points
+  m_text: Generate Credits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d7b5f028d87359f4ea583a8ae25b69b3, type: 2}
   m_sharedMaterial: {fileID: 8097342628078802958, guid: d7b5f028d87359f4ea583a8ae25b69b3, type: 2}
@@ -1438,7 +1438,7 @@ GameObject:
   - component: {fileID: 909372440}
   - component: {fileID: 909372439}
   m_Layer: 5
-  m_Name: GeneratePoints
+  m_Name: GenerateCredits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1462,8 +1462,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 691.47, y: 271}
-  m_SizeDelta: {x: 345.4726, y: 88.8837}
+  m_AnchoredPosition: {x: 683.5668, y: 271}
+  m_SizeDelta: {x: 361.2791, y: 88.8837}
   m_Pivot: {x: 0.50000006, y: 0.4999999}
 --- !u!114 &909372439
 MonoBehaviour:
@@ -1819,7 +1819,7 @@ GameObject:
   - component: {fileID: 998827039}
   - component: {fileID: 998827038}
   m_Layer: 5
-  m_Name: Points
+  m_Name: Credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1865,7 +1865,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Points: ***'
+  m_text: 'Credits: ***'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d7b5f028d87359f4ea583a8ae25b69b3, type: 2}
   m_sharedMaterial: {fileID: 8097342628078802958, guid: d7b5f028d87359f4ea583a8ae25b69b3, type: 2}
@@ -3784,9 +3784,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0a7b4d2330e614ca3ab350efacdde7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 0
+  credits: 0
   gems: 0
-  pointsUI: {fileID: 998827038}
+  creditsUI: {fileID: 998827038}
   gemsUI: {fileID: 1744348442}
 --- !u!1 &2013098874
 GameObject:

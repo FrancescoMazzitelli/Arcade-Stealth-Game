@@ -12,9 +12,9 @@ using UnityEngine.SceneManagement;
 
 public class ShopManager : MonoBehaviour
 {
-    public int points;
+    public int credits;
     public int gems;
-    public TMP_Text pointsUI;
+    public TMP_Text creditsUI;
     public TMP_Text gemsUI;
     private List<ShopItem> shopItems;
     private List<GameObject> shopPanelsGO;
@@ -80,7 +80,7 @@ public class ShopManager : MonoBehaviour
         {
             shopPanelsGO[i].SetActive(true);
         }
-        pointsUI.text = "Points: " + points.ToString();
+        creditsUI.text = "Credits: " + credits.ToString();
         gemsUI.text = "Processor parts: " + gems.ToString();
         LoadPanels();
         CheckPurchaseable();
@@ -94,8 +94,8 @@ public class ShopManager : MonoBehaviour
 
     public void AddPoints()
     {
-        points+=50;
-        pointsUI.text = "Points: " + points.ToString();
+        credits+=50;
+        creditsUI.text = "Credits: " + credits.ToString();
         CheckPurchaseable();
     }
 
@@ -112,7 +112,7 @@ public class ShopManager : MonoBehaviour
         
         for (int i = 0; i < shopItems.Count; i++)
         {
-            if (points >= shopItems[i].price)
+            if (credits >= shopItems[i].price)
                 buttons[i].interactable = true;
             else
                 buttons[i].interactable = false;
@@ -131,7 +131,7 @@ public class ShopManager : MonoBehaviour
 
     public void PurchaseItem(int buttonIndex)
     {
-        if(points  >= shopItems[buttonIndex].price)
+        if(credits  >= shopItems[buttonIndex].price)
         {
             //Attiva il modifier
             foreach (PlayerModifier modifier in manager.Modifiers)
@@ -142,8 +142,8 @@ public class ShopManager : MonoBehaviour
                 }
             }
 
-            points = points - shopItems[buttonIndex].price;
-            pointsUI.text = "Points: " + points.ToString();
+            credits = credits - shopItems[buttonIndex].price;
+            creditsUI.text = "Credits: " + credits.ToString();
 
             /* scrivi sul file per backup e per non perdere i potenziamenti
              * all'avvio di una nuova sessione di gioco */
@@ -205,8 +205,8 @@ public class ShopManager : MonoBehaviour
         // Provvisorio
         // Qui bisogna collegare lo script di generazione procedurale del livello
         SceneManager.LoadScene("Tutorial");
-        PlayerGUI.CurrentHealth = (int)PlayerManager.MaxHealth;
-        PlayerGUI.CurrentEnergy = (int)PlayerManager.MaxEnergy;
+        PlayerGUI.CurrentHealth = (int)PlayerGUI.MaxHealth;
+        PlayerGUI.CurrentEnergy = (int)PlayerGUI.MaxEnergy;
         SampleTeleporterController.Active = true;
     }
 

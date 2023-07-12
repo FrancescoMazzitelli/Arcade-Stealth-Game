@@ -8,8 +8,8 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         SceneManager.LoadScene("Tutorial");
-        PlayerGUI.CurrentHealth = (int)PlayerManager.MaxHealth;
-        PlayerGUI.CurrentEnergy = (int)PlayerManager.MaxEnergy;
+        PlayerGUI.CurrentHealth = (int)PlayerGUI.MaxHealth;
+        PlayerGUI.CurrentEnergy = (int)PlayerGUI.MaxEnergy;
         SampleTeleporterController.Active = true;
     }
 

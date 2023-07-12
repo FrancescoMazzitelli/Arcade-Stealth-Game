@@ -14691,7 +14691,6 @@ MonoBehaviour:
   agent: {fileID: 0}
   laserPrefab: {fileID: 0}
   firePoint: {fileID: 0}
-  stoppingDistance: 2.3
 --- !u!114 &707578085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43613,7 +43612,6 @@ GameObject:
   - component: {fileID: 1991574882}
   - component: {fileID: 1991574881}
   - component: {fileID: 1991574880}
-  - component: {fileID: 1991574879}
   - component: {fileID: 1991574878}
   - component: {fileID: 1991574877}
   - component: {fileID: 1991574876}
@@ -43726,18 +43724,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverScript: {fileID: 1896364932}
---- !u!114 &1991574879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991574874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d799fd4a66f2ba49bea32185bdad61f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1991574880
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46149,8 +46135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e9596c317cf8314a98ead0f0399a19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  maxMana: 0
 --- !u!1001 &2132753546
 PrefabInstance:
   m_ObjectHideFlags: 0
